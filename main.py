@@ -9,10 +9,29 @@ def crop_and_save(input_path, output_path, left, top, right, bottom):
 
         # 保存截取的图像为新的BMP文件
         cropped_img.save(output_path, "BMP")
+        print(111)
+
 
 is_ok = 0
 zylan = 0
 num = 1
+
+
+def is_bai(bmp_file_path):
+    with Image.open(bmp_file_path) as img:
+        # 获取图像的宽度和高度
+        width, height = img.size
+        print(width, height)
+        baise = 0
+        for y in range(1, height):
+            for x in range(1, width):
+                if img.getpixel((x, y)) != (255, 255, 255):
+                    baise = 1
+                    break
+
+        return baise
+
+
 def locate_all_brackets_coordinates(bmp_file_path):
     global is_ok, zylan, num
     # print("aaa")
@@ -22,12 +41,10 @@ def locate_all_brackets_coordinates(bmp_file_path):
         width, height = img.size
         print(width, height)
 
-
-        # 遍历图像的每个像素
         for y in range(1, height):
             for x in range(1, 1250):
 
-                if is_ok == 1:
+                if is_ok != 0 and is_ok != 3:
                     start_x = 0
                     start_y = 0
                     end_x = 0
@@ -44,33 +61,55 @@ def locate_all_brackets_coordinates(bmp_file_path):
                     for x1 in range(1, 1250):
                         for start_y in range(1, height):
                             pixel = img.getpixel((x1, start_y))
-                            if pixel != (255, 255, 255) and img.getpixel((x1+1, start_y))!= (255, 255, 255):
+                            if pixel != (255, 255, 255) and img.getpixel((x1 + 1, start_y)) != (255, 255, 255):
                                 pixel = img.getpixel((x1, start_y + 1))
-                                if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+1))!= (255, 255, 255):
+                                if pixel != (255, 255, 255) and img.getpixel((x1 + 1, start_y + 1)) != (
+                                        255, 255, 255):
                                     pixel = img.getpixel((x1, start_y + 2))
-                                    if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+2))!= (255, 255, 255):
+                                    if pixel != (255, 255, 255) and img.getpixel((x1 + 1, start_y + 2)) != (
+                                            255, 255, 255):
                                         pixel = img.getpixel((x1, start_y + 3))
-                                        if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+3))!= (255, 255, 255):
+                                        if pixel != (255, 255, 255) and img.getpixel((x1 + 1, start_y + 3)) != (
+                                                255, 255, 255):
                                             pixel = img.getpixel((x1, start_y + 4))
-                                            if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+4))== (255, 255, 255):
+                                            if pixel == (255, 255, 255) and img.getpixel((x1 + 1, start_y + 4)) == (
+                                                    255, 255, 255):
                                                 pixel = img.getpixel((x1, start_y + 5))
-                                                if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+5))== (255, 255, 255):
+                                                if pixel == (255, 255, 255) and img.getpixel(
+                                                        (x1 + 1, start_y + 5)) == (255, 255, 255):
                                                     pixel = img.getpixel((x1, start_y + 6))
-                                                    if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+6))== (255, 255, 255):
+                                                    if pixel == (255, 255, 255) and img.getpixel(
+                                                            (x1 + 1, start_y + 6)) == (255, 255, 255):
                                                         pixel = img.getpixel((x1, start_y + 7))
-                                                        if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+7))!= (255, 255, 255):
+                                                        if pixel != (255, 255, 255) and img.getpixel(
+                                                                (x1 + 1, start_y + 7)) != (255, 255, 255):
                                                             pixel = img.getpixel((x1, start_y + 8))
-                                                            if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+8))!= (255, 255, 255):
+                                                            if pixel != (255, 255, 255) and img.getpixel(
+                                                                    (x1 + 1, start_y + 8)) != (255, 255, 255):
                                                                 pixel = img.getpixel((x1, start_y + 9))
-                                                                if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+9))!= (255, 255, 255):
+                                                                if pixel != (255, 255, 255) and img.getpixel(
+                                                                        (x1 + 1, start_y + 9)) != (255, 255, 255):
                                                                     pixel = img.getpixel((x1, start_y + 10))
-                                                                    if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+10))!= (255, 255, 255):
+                                                                    if pixel != (255, 255, 255) and img.getpixel(
+                                                                            (x1 + 1, start_y + 10)) != (
+                                                                            255, 255, 255):
                                                                         pixel = img.getpixel((x1, start_y + 11))
-                                                                        if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+11))== (255, 255, 255):
+                                                                        if pixel == (
+                                                                                255, 255, 255) and img.getpixel(
+                                                                            (x1 + 1, start_y + 11)) == (
+                                                                                255, 255, 255):
                                                                             pixel = img.getpixel((x1, start_y + 12))
-                                                                            if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+12))== (255, 255, 255):
-                                                                                pixel = img.getpixel((x1, start_y + 13))
-                                                                                if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+13))== (255, 255, 255):
+                                                                            if pixel == (
+                                                                                    255, 255, 255) and img.getpixel(
+                                                                                (x1 + 1, start_y + 12)) == (
+                                                                                    255, 255, 255):
+                                                                                pixel = img.getpixel(
+                                                                                    (x1, start_y + 13))
+                                                                                if pixel == (
+                                                                                        255, 255,
+                                                                                        255) and img.getpixel(
+                                                                                    (x1 + 1, start_y + 13)) == (
+                                                                                        255, 255, 255):
                                                                                     yes = start_y - 100
                                                                                     break
                         if yes != 0:
@@ -167,9 +206,13 @@ def locate_all_brackets_coordinates(bmp_file_path):
                     print(start_x, start_y, end_x, end_y)
 
                     # 执行截取和保存操作
-                    crop_and_save(bmp_file_path, output_bmp_path + str(num) + "-2" + ".bmp", *crop_coordinates)
+                    crop_and_save(bmp_file_path, output_bmp_path + str(num) + str(is_ok + 1) + ".bmp",
+                                  *crop_coordinates)
                     num += 1
-                    is_ok = 0
+                    if index == 1:
+                        is_ok = 0
+                    else:
+                        is_ok += 1
 
                 # print(x,y)
 
@@ -247,7 +290,7 @@ def locate_all_brackets_coordinates(bmp_file_path):
                 end_x = 0
                 end_y = 0
                 if index == 1:
-                    # print(1212)
+                    print(1212)
                     if x < 1274:
                         zylan = 1
                     else:
@@ -354,7 +397,7 @@ def locate_all_brackets_coordinates(bmp_file_path):
                             break
                     if index == 1:
                         print(2121)
-                        end_y = y2-10
+                        end_y = y2 - 10
                     else:
                         end_y = 3150
                         is_ok = 1
@@ -367,16 +410,15 @@ def locate_all_brackets_coordinates(bmp_file_path):
                     num += 1
 
                     if is_ok == 1:
-                        num = num-1
+                        num = num - 1
                         break
             if is_ok == 1:
                 break
 
-
         for y in range(1, height):
             for x in range(1250, width):
 
-                if is_ok == 1:
+                if is_ok != 0 and is_ok != 3:
                     start_x = 0
                     start_y = 0
                     end_x = 0
@@ -393,38 +435,60 @@ def locate_all_brackets_coordinates(bmp_file_path):
                     for x1 in range(1246, 1290):
                         for start_y in range(1, height):
                             pixel = img.getpixel((x1, start_y))
-                            if pixel != (255, 255, 255) and img.getpixel((x1+1, start_y))!= (255, 255, 255):
+                            if pixel != (255, 255, 255) and img.getpixel((x1 + 1, start_y)) != (255, 255, 255):
                                 pixel = img.getpixel((x1, start_y + 1))
-                                if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+1))!= (255, 255, 255):
+                                if pixel != (255, 255, 255) and img.getpixel((x1 + 1, start_y + 1)) != (
+                                        255, 255, 255):
                                     pixel = img.getpixel((x1, start_y + 2))
-                                    if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+2))!= (255, 255, 255):
+                                    if pixel != (255, 255, 255) and img.getpixel((x1 + 1, start_y + 2)) != (
+                                            255, 255, 255):
                                         pixel = img.getpixel((x1, start_y + 3))
-                                        if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+3))!= (255, 255, 255):
+                                        if pixel != (255, 255, 255) and img.getpixel((x1 + 1, start_y + 3)) != (
+                                                255, 255, 255):
                                             pixel = img.getpixel((x1, start_y + 4))
-                                            if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+4))== (255, 255, 255):
+                                            if pixel == (255, 255, 255) and img.getpixel((x1 + 1, start_y + 4)) == (
+                                                    255, 255, 255):
                                                 pixel = img.getpixel((x1, start_y + 5))
-                                                if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+5))== (255, 255, 255):
+                                                if pixel == (255, 255, 255) and img.getpixel(
+                                                        (x1 + 1, start_y + 5)) == (255, 255, 255):
                                                     pixel = img.getpixel((x1, start_y + 6))
-                                                    if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+6))== (255, 255, 255):
+                                                    if pixel == (255, 255, 255) and img.getpixel(
+                                                            (x1 + 1, start_y + 6)) == (255, 255, 255):
                                                         pixel = img.getpixel((x1, start_y + 7))
-                                                        if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+7))!= (255, 255, 255):
+                                                        if pixel != (255, 255, 255) and img.getpixel(
+                                                                (x1 + 1, start_y + 7)) != (255, 255, 255):
                                                             pixel = img.getpixel((x1, start_y + 8))
-                                                            if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+8))!= (255, 255, 255):
+                                                            if pixel != (255, 255, 255) and img.getpixel(
+                                                                    (x1 + 1, start_y + 8)) != (255, 255, 255):
                                                                 pixel = img.getpixel((x1, start_y + 9))
-                                                                if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+9))!= (255, 255, 255):
+                                                                if pixel != (255, 255, 255) and img.getpixel(
+                                                                        (x1 + 1, start_y + 9)) != (255, 255, 255):
                                                                     pixel = img.getpixel((x1, start_y + 10))
-                                                                    if pixel != (255, 255, 255)and img.getpixel((x1+1, start_y+10))!= (255, 255, 255):
+                                                                    if pixel != (255, 255, 255) and img.getpixel(
+                                                                            (x1 + 1, start_y + 10)) != (
+                                                                            255, 255, 255):
                                                                         pixel = img.getpixel((x1, start_y + 11))
-                                                                        if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+11))== (255, 255, 255):
+                                                                        if pixel == (
+                                                                                255, 255, 255) and img.getpixel(
+                                                                            (x1 + 1, start_y + 11)) == (
+                                                                                255, 255, 255):
                                                                             pixel = img.getpixel((x1, start_y + 12))
-                                                                            if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+12))== (255, 255, 255):
-                                                                                pixel = img.getpixel((x1, start_y + 13))
-                                                                                if pixel == (255, 255, 255)and img.getpixel((x1+1, start_y+13))== (255, 255, 255):
+                                                                            if pixel == (
+                                                                                    255, 255, 255) and img.getpixel(
+                                                                                (x1 + 1, start_y + 12)) == (
+                                                                                    255, 255, 255):
+                                                                                pixel = img.getpixel(
+                                                                                    (x1, start_y + 13))
+                                                                                if pixel == (
+                                                                                        255, 255,
+                                                                                        255) and img.getpixel(
+                                                                                    (x1 + 1, start_y + 13)) == (
+                                                                                        255, 255, 255):
                                                                                     yes = start_y - 15
                                                                                     break
                         if yes != 0:
                             break
-                    start_y = yes-30
+                    start_y = yes - 30
                     # 找下一个【
                     y2 = start_y
                     for y2 in range(start_y, height):
@@ -515,9 +579,14 @@ def locate_all_brackets_coordinates(bmp_file_path):
                     print(start_x, start_y, end_x, end_y)
 
                     # 执行截取和保存操作
-                    crop_and_save(bmp_file_path, output_bmp_path + str(num) + "-2" + ".bmp", *crop_coordinates)
+                    crop_and_save(bmp_file_path, output_bmp_path + str(num) + str(is_ok + 1) + ".bmp",
+                                  *crop_coordinates)
                     num += 1
-                    is_ok = 0
+                    if index == 1:
+                        is_ok = 0
+                    else:
+                        is_ok += 1
+                    # is_ok = 0
 
                 pixel = img.getpixel((x, y))
                 index = 0
@@ -718,27 +787,13 @@ def locate_all_brackets_coordinates(bmp_file_path):
                 break
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 示例用法
-for i in range(10,459):
-    bmp_file_path = "D:\zhuomian\新高考生物真题全刷：基础1000题 含扉页_00\新高考生物真题全刷：基础1000题 含扉页_"+str(i)+".bmp"
-    output_bmp_path = "D:\zhuomian\end\ "
+for i in range(18, 459):
+    # "D:\zhuomian\新高考化学真题全刷：基础1500题 含扉页_18\新高考化学真题全刷：基础1500题 含扉页_00.bmp"
+    bmp_file_path = "D:\zhuomian\新高考化学真题全刷：基础1500题 含扉页_18\新高考化学真题全刷：基础1500题 含扉页_" + str(
+        i) + ".bmp"
+    output_bmp_path = "D:\zhuomian\huaxue\ "
     locate_all_brackets_coordinates(bmp_file_path)
-
-
-
 
 # bmp_file_path = "D:\zhuomian\新高考生物真题全刷：基础1000题 含扉页_25.bmp"
 # output_bmp_path = "D:\zhuomian\end\ "
